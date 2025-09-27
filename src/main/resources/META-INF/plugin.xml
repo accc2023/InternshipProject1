@@ -1,0 +1,18 @@
+<idea-plugin>
+    <id>InternshipProject1</id>
+    <name>Text Search</name>
+    <vendor email="arhanc21@gmail.com">Example</vendor>
+    <version>1.0.0</version>
+    <description>Search given string inside a directory.</description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow
+                id="Text Search"
+                anchor="right"
+                factoryClass="SearchToolWindowFactory"
+                canCloseContent="false"
+        />
+    </extensions>
+</idea-plugin>
