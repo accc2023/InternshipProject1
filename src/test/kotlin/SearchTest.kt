@@ -7,10 +7,12 @@ import java.nio.file.Path
 
 class SearchTest {
 
+    val abs = "/abs/path/here/" // till project folder
+
     @Test
     fun hola() = runBlocking {
         // edit below file path to test (left mine below as an example)
-        val dir = Path.of("/Users/pavanchhabra/IdeaProjects/InternshipProject1/src")
+        val dir = Path.of(abs + "/InternshipProject1/src")
         val result = searchForTextOccurrences("hola", dir).toList()
 
         val simplified = result
@@ -23,7 +25,7 @@ class SearchTest {
     @Test
     fun holaSize() = runBlocking {
         // edit below file path to test
-        val dir = Path.of("/Users/pavanchhabra/IdeaProjects/InternshipProject1/src")
+        val dir = Path.of(abs + "InternshipProject1/src")
         val result = searchForTextOccurrences("hola", dir).toList()
 
         val simplified = result
@@ -36,7 +38,7 @@ class SearchTest {
     @Test
     fun email() = runBlocking {
         // add your own file path
-        val dir = Path.of("/Users/pavanchhabra/IdeaProjects/InternshipProject1/src/main/kotlin")
+        val dir = Path.of(abs + "InternshipProject1/src/main/kotlin")
         val result = searchForTextOccurrences("arhanc21@gmail.com", dir).toList()
 
         val simplified = result
