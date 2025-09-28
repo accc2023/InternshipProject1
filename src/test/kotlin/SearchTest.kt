@@ -4,10 +4,13 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import java.nio.file.Path
+import org.junit.jupiter.api.assertThrows
 
 class SearchTest {
 
-    val abs = "/abs/path/here/" // till project folder
+    val abs = "/root/path/here/" // include your root path till project folder
+    // Note all of these tests pass. Also included in the directory is a png file and the search
+    // function is able to pass over when iterating through files in the specified directory
 
     @Test
     fun hola() = runBlocking {
@@ -38,7 +41,7 @@ class SearchTest {
     @Test
     fun email() = runBlocking {
         // add your own file path
-        val dir = Path.of(abs + "InternshipProject1/src/main/kotlin")
+        val dir = Path.of(abs + "InternshipProject1/src/main/")
         val result = searchForTextOccurrences("arhanc21@gmail.com", dir).toList()
 
         val simplified = result
@@ -47,5 +50,25 @@ class SearchTest {
 
         assertTrue(simplified.contains(Triple("plugin.xml", 4, 19)))
         assertEquals(2, simplified.size)
+    }
+
+    @Test
+    fun empty(): Unit = runBlocking {
+        // add your own file path
+        val dir = Path.of(abs + "InternshipProject1/src/main/")
+        // Cannot first house outcome in variable called "result" as it will throw an error before we check
+        assertThrows<IllegalArgumentException> {
+            searchForTextOccurrences("", dir).toList()
+        }
+    }
+
+    @Test
+    fun badPath(): Unit = runBlocking {
+        val dir = Path.of("/bad/path")
+
+        // Path does not exist; tests successfully
+        assertThrows<IllegalArgumentException> {
+            searchForTextOccurrences("good times", dir).toList()
+        }
     }
 }
